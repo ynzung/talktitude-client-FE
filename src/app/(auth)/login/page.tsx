@@ -9,6 +9,7 @@ import { useState } from 'react';
 import FindAccount from '@/components/login/FindAccount';
 import LogoImage from '/public/logo/logo.svg';
 import { IoIosCheckmarkCircleOutline } from 'react-icons/io';
+import { Layout } from '@/components/common/Layout';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -34,7 +35,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="h-full min-h-[100vh] flex flex-col justify-center items-center gap-24">
+    <Layout center={true} gap="gap-24">
       <div>
         <Image
           src={LogoImage}
@@ -87,6 +88,6 @@ export default function LoginPage() {
         </Button>
         <FindAccount />
       </div>
-    </div>
+    </Layout>
   );
 }
