@@ -5,7 +5,13 @@ import ChatInputBar from '@/components/chat/chatRoom/ChatInputBar';
 import Header from '@/components/common/Header';
 import React, { useEffect, useRef, useState } from 'react';
 
-const mockMessages = [
+interface Message {
+  id: number;
+  is_mine: boolean;
+  message: string;
+}
+
+const mockMessages: Message[] = [
   {
     id: 1,
     is_mine: false,
