@@ -18,7 +18,7 @@ export default function Button({
       className={`
         flex w-[22.4375rem] h-13 py-3.5
         justify-center items-center 
-        rounded-[1.25rem] text-base font-semibold
+        rounded-[1.25rem] text-lg font-bold
         ${disabled ? 'bg-textLightGrey cursor-not-allowed' : 'bg-mainColor cursor-pointer'}
         text-white
       `}
