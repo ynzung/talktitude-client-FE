@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { IoArrowBackOutline } from 'react-icons/io5';
 
 interface ChatHeaderPropTypes {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   isChat?: boolean;
 }
 
