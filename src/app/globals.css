@@ -33,11 +33,16 @@ html {
 :root {
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  /* overflow: hidden; */
   min-height: 100vh;
 }
 
 body {
   background: #ffffff;
   color: #3b3b3b;
+  width: 100%;
+  max-width: 600px;
+  height: 100%;
+  min-height: 100vh;
+  margin: 0 auto;
 }
