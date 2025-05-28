@@ -3,6 +3,20 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  html {
+    font-family:
+      'Pretendard Variable',
+      -apple-system,
+      BlinkMacSystemFont,
+      system-ui,
+      'Malgun Gothic',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
 html {
   background-color: #ffffff;
   display: flex;
@@ -21,12 +35,9 @@ html {
   flex-direction: column;
   overflow: hidden;
   min-height: 100vh;
-
-  --fontFamily:
-    'Pretendard', '-apple-system', 'BlinkMacSystemFont', 'system-ui',
-    'Malgun Gothic', 'sans-serif';
 }
 
 body {
-  font-family: var(--fontFamily);
+  background: #ffffff;
+  color: #3b3b3b;
 }
