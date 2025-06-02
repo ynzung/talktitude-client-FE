@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation';
 interface ItemPropTypes {
   data: {
     id: number;
-    rastaurant_image: string;
+    restaurant_image: string;
     restaurant_name: string;
     menu_name: string;
     recent_message: string;
@@ -16,7 +16,7 @@ interface ItemPropTypes {
 
 export default function Item({ data }: ItemPropTypes) {
   const router = useRouter();
-  const { id, rastaurant_image, restaurant_name, menu_name, recent_message } =
+  const { id, restaurant_image, restaurant_name, menu_name, recent_message } =
     data;
 
   const handleClick = () => {
@@ -31,7 +31,7 @@ export default function Item({ data }: ItemPropTypes) {
     >
       <div className="w-20 h-20 relative flex-shrink-0">
         <Image
-          src={rastaurant_image}
+          src={restaurant_image}
           alt="가게 사진"
           fill
           className="object-cover rounded-md"

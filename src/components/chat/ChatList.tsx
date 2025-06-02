@@ -4,7 +4,7 @@ interface ChatListPropTypes {
   title: string;
   items: {
     id: number;
-    rastaurant_image: string;
+    restaurant_image: string;
     restaurant_name: string;
     menu_name: string;
     recent_message: string;
