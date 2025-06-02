@@ -1,6 +1,6 @@
 'use client';
 
-import Item from '../ui/Item';
+import Item from '../../ui/Item';
 
 interface ChatListPropTypes {
   title: string;
