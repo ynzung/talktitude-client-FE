@@ -6,8 +6,11 @@ import { Layout } from '@/components/common/Layout';
 import React from 'react';
 import sampleImage from '@/assets/images/sample-square.svg';
 import Button from '@/components/ui/Button';
+import { useRouter } from 'next/navigation';
 
 export default function ChatListPage() {
+  const router = useRouter();
+
   const ongoingChats: {
     id: number;
     restaurant_image: string;
@@ -60,9 +63,7 @@ export default function ChatListPage() {
         </div>
       </Layout>
       <div className="fixed w-full max-w-[600px] bottom-0 bg-bgLightBlue p-4 z-10 border-x border-lineGrey">
-        <Button onClick={() => console.log('상담 시작하기')}>
-          상담 시작하기
-        </Button>
+        <Button onClick={() => router.push('/chat/new')}>상담 시작하기</Button>
       </div>
     </div>
   );
