@@ -1,6 +1,6 @@
 'use client';
 
-import ChatList from '@/components/chat/ChatList';
+import ChatList from '@/components/chat/chatList/ChatList';
 import Header from '@/components/common/Header';
 import { Layout } from '@/components/common/Layout';
 import React from 'react';

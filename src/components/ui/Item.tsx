@@ -10,14 +10,21 @@ interface ItemPropTypes {
     restaurant_image: string;
     restaurant_name: string;
     menu_name: string;
-    recent_message: string;
+    recent_message?: string;
+    order_date?: string;
   };
 }
 
 export default function Item({ data }: ItemPropTypes) {
   const router = useRouter();
-  const { id, restaurant_image, restaurant_name, menu_name, recent_message } =
-    data;
+  const {
+    id,
+    restaurant_image,
+    restaurant_name,
+    menu_name,
+    recent_message,
+    order_date,
+  } = data;
 
   const handleClick = () => {
     console.log('Clicked item with id:', id);
@@ -42,8 +49,8 @@ export default function Item({ data }: ItemPropTypes) {
           {restaurant_name}
         </div>
         <div className=" text-TextBlack text-sm font-normal">{menu_name}</div>
-        <div className="text-textLightGrey text-sm font-normal line-clamp-1 ">
-          {recent_message}
+        <div className="text-textLightGrey text-sm font-normal line-clamp-1">
+          {recent_message || order_date}
         </div>
       </div>
     </div>
