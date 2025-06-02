@@ -10,7 +10,8 @@ import { useRouter } from 'next/navigation';
 
 export default function ChatListPage() {
   const router = useRouter();
-  const handleClick = () => {
+
+  const handleStartChat = () => {
     router.push('/chat/new');
   };
 
@@ -66,7 +67,7 @@ export default function ChatListPage() {
         </div>
       </Layout>
       <div className="fixed w-full max-w-[600px] bottom-0 bg-bgLightBlue p-4 z-10 border-x border-lineGrey">
-        <Button onClick={handleClick}>상담 시작하기</Button>
+        <Button onClick={handleStartChat}>상담 시작하기</Button>
       </div>
     </div>
   );

@@ -27,7 +27,6 @@ export default function Item({ data }: ItemPropTypes) {
   } = data;
 
   const handleClick = () => {
-    console.log('Clicked item with id:', id);
     router.push(`/chat/${id}`);
   };
 
