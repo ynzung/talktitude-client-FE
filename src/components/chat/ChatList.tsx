@@ -1,3 +1,5 @@
+'use client';
+
 import Item from '../ui/Item';
 
 interface ChatListPropTypes {
@@ -10,6 +12,7 @@ interface ChatListPropTypes {
     recent_message: string;
   }[];
 }
+
 export default function ChatList({ title, items }: ChatListPropTypes) {
   return (
     <div className="w-full">
