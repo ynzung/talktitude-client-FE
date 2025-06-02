@@ -13,7 +13,7 @@ export default function Header({
   isChat = false,
 }: ChatHeaderPropTypes) {
   return (
-    <div className="w-full max-w-[600px] fixed">
+    <div className="w-full max-w-[600px] fixed z-10">
       <div className=" h-14 bg-mainColor flex items-center justify-start px-[22px]">
         <Image
           src={WhiteLogo}
