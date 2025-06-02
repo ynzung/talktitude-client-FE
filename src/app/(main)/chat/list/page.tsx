@@ -10,6 +10,9 @@ import { useRouter } from 'next/navigation';
 
 export default function ChatListPage() {
   const router = useRouter();
+  const handleClick = () => {
+    router.push('/chat/new');
+  };
 
   const ongoingChats: {
     id: number;
@@ -63,7 +66,7 @@ export default function ChatListPage() {
         </div>
       </Layout>
       <div className="fixed w-full max-w-[600px] bottom-0 bg-bgLightBlue p-4 z-10 border-x border-lineGrey">
-        <Button onClick={() => router.push('/chat/new')}>상담 시작하기</Button>
+        <Button onClick={handleClick}>상담 시작하기</Button>
       </div>
     </div>
   );
