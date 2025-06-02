@@ -82,7 +82,7 @@ export default function LoginPage() {
           </button>
         </div>
       </div>
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-3 w-[22.4375rem]">
         <Button disabled={!isValid} onClick={handleLogin}>
           로그인
         </Button>

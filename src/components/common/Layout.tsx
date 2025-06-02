@@ -8,7 +8,6 @@ export type LayoutProps = {
   center?: boolean;
   gap?: string;
   scrollToTop?: boolean;
-  className?: string;
 };
 
 export const Layout = ({
@@ -17,7 +16,6 @@ export const Layout = ({
   center = false,
   gap = 'gap-0',
   scrollToTop = false,
-  className,
 }: LayoutProps) => {
   useEffect(() => {
     if (scrollToTop) window.scrollTo(0, 0);
@@ -28,7 +26,5 @@ export const Layout = ({
     ? `flex flex-col justify-center items-center ${gap}`
     : '';
 
-  return (
-    <div className={`${baseClass} ${centerClass}${className}`}>{children}</div>
-  );
+  return <div className={`${baseClass} ${centerClass}`}>{children}</div>;
 };
