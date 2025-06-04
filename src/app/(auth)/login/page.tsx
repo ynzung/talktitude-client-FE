@@ -9,7 +9,7 @@ import { useState } from 'react';
 import FindAccount from '@/components/login/FindAccount';
 import LogoImage from '/public/logo/logo.svg';
 import { IoIosCheckmarkCircleOutline } from 'react-icons/io';
-import { Layout } from '@/components/common/Layout';
+import Layout from '@/components/common/Layout';
 
 export default function LoginPage() {
   const router = useRouter();

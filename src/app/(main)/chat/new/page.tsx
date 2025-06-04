@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Header from '@/components/common/Header';
-import { Layout } from '@/components/common/Layout';
+import Layout from '@/components/common/Layout';
 import sampleImage from '@/assets/images/sample-square.svg';
 import ChatOrderList from '@/components/chat/chatNew/ChatOrderList';
 import Link from 'next/link';

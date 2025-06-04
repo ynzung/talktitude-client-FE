@@ -2,7 +2,7 @@
 
 import ChatList from '@/components/chat/chatList/ChatList';
 import Header from '@/components/common/Header';
-import { Layout } from '@/components/common/Layout';
+import Layout from '@/components/common/Layout';
 import React from 'react';
 import sampleImage from '@/assets/images/sample-square.svg';
 import Button from '@/components/ui/Button';
