@@ -33,7 +33,7 @@ export default function Item({ data }: ItemPropTypes) {
   return (
     <div
       onClick={handleClick}
-      className="w-full px-4 py-5 bg-White border-b border-LineGrey flex flex-row gap-3.5 overflow-hidden cursor-pointer last:border-b-0"
+      className="w-full px-4 py-5 bg-White border-b border-LineGrey flex flex-row gap-3.5 overflow-hidden cursor-pointer last:border-b-0 hover:bg-[#f5f5f5]"
     >
       <div className="w-20 h-20 relative flex-shrink-0">
         <Image
