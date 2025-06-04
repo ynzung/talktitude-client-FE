@@ -15,7 +15,7 @@ export default function Header({
 }: ChatHeaderPropTypes) {
   const router = useRouter();
   const handleBack = () => {
-    router.back();
+    router.push('/chat/list');
   };
 
   return (
