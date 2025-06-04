@@ -56,8 +56,8 @@ export default function ChatInputBar({
         disabled={disabled}
       />
       <button
-        className={`bg-[#EEEEEE] flex items-center justify-center rounded-full w-10 h-10 mr-3 hover:bg-[#E0E0E0] ${
-          disabled ? 'opacity-50 cursor-not-allowed' : ''
+        className={`bg-[#EEEEEE] flex items-center justify-center rounded-full w-10 h-10 mr-3 ${
+          disabled ? 'opacity-50 cursor-not-allowed' : 'hover:bg-[#E0E0E0]'
         }`}
         onClick={handleImageUpload}
         disabled={disabled}
