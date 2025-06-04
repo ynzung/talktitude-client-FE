@@ -31,7 +31,7 @@ export default function LoginPage() {
     formValue.user_id.trim() !== '' && formValue.passwd.trim() !== '';
 
   const handleLogin = async () => {
-    router.push('/');
+    router.push('/chat/list');
   };
 
   return (
