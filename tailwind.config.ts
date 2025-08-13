@@ -9,6 +9,7 @@ const config: Config = {
         mainColor: '#5573E2',
         textBlack: '#3B3B3B',
         textLightGray: '#9A9A9A',
+        textRed: '#F06969',
         lineGray: '#D9D9D9',
         white: '#FFFFFF',
         bgLightBlue: '#EEF2F9',
