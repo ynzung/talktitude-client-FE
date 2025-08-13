@@ -10,13 +10,13 @@ export type LayoutProps = {
   scrollToTop?: boolean;
 };
 
-export const Layout = ({
+export default function Layout({
   children,
-  padding = 'pt-0 pd-0',
+  padding = 'pt-0 pb-0',
   center = false,
   gap = 'gap-0',
   scrollToTop = false,
-}: LayoutProps) => {
+}: LayoutProps) {
   useEffect(() => {
     if (scrollToTop) window.scrollTo(0, 0);
   }, [scrollToTop]);
@@ -27,4 +27,4 @@ export const Layout = ({
     : '';
 
   return <div className={`${baseClass} ${centerClass}`}>{children}</div>;
-};
+}

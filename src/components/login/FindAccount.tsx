@@ -9,7 +9,7 @@ export default function FindAccount() {
     alert('비밀번호 찾기로 이동');
   };
   return (
-    <div className="flex justify-center gap-2.5 text-base font-medium text-textLightGrey">
+    <div className="flex justify-center gap-2.5 text-base font-medium text-textLightGray">
       <button className="hover:text-mainColor" onClick={FindId}>
         아이디 찾기
       </button>

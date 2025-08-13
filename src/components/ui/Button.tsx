@@ -19,8 +19,8 @@ export default function Button({
         flex w-full h-13 py-3.5
         justify-center items-center 
         rounded-[1.25rem] text-lg font-bold
-        ${disabled ? 'bg-textLightGrey cursor-not-allowed' : 'bg-mainColor cursor-pointer'}
-        text-white
+        ${disabled ? 'bg-textLightGrey cursor-not-allowed' : 'bg-mainColor cursor-pointer hover:bg-[#4A66C9]'}
+        text-white 
       `}
     >
       {children}
