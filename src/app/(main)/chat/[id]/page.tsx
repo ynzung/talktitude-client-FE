@@ -44,7 +44,7 @@ export default function ChatRoomPage({
 
       <div className="pt-28 pb-14">
         <div
-          className="h-full overflow-y-auto bg-bgLightBlue px-[24px] py-2 border border-lr border-t-0 border-lineGrey"
+          className="h-full overflow-y-auto bg-bgLightBlue px-[24px] py-2 border border-lr border-t-0 border-lineGray"
           style={{ height: 'calc(100dvh - 177px)' }}
         >
           <div className="flex flex-col min-h-full">

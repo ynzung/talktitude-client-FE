@@ -18,7 +18,7 @@ export default function ChatListPage() {
   return (
     <div className="bg-bgLightBlue">
       <Header isChat={false} />
-      <Layout padding="pt-14 pb-40 border-x border-lineGrey">
+      <Layout padding="pt-14 pb-40 border-x border-lineGray">
         <div className="mt-5">
           <ChatList title="상담중" items={ongoingChats} />
         </div>
@@ -26,7 +26,7 @@ export default function ChatListPage() {
           <ChatList title="상담종료" items={endedChats} />
         </div>
       </Layout>
-      <div className="fixed w-full max-w-[600px] bottom-0 bg-bgLightBlue p-4 z-10 border-x border-lineGrey">
+      <div className="fixed w-full max-w-[600px] bottom-0 bg-bgLightBlue p-4 z-10 border-x border-lineGray">
         <Button onClick={handleStartChat}>상담 시작하기</Button>
       </div>
     </div>

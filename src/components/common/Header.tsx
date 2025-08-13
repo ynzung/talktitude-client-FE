@@ -30,7 +30,7 @@ export default function Header({
         />
       </div>
       {isChat && (
-        <div className="w-full max-w-[600px] h-14 bg-bgLightBlue flex items-center justify-start px-[22px] border border-t-0 border-lineGrey">
+        <div className="w-full max-w-[600px] h-14 bg-bgLightBlue flex items-center justify-start px-[22px] border border-t-0 border-lineGray">
           <button className="flex items-center justify-center w-7 h-7">
             <IoArrowBackOutline
               size={30}

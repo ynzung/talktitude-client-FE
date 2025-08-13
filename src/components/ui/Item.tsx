@@ -33,7 +33,7 @@ export default function Item({ data }: ItemPropTypes) {
   return (
     <div
       onClick={handleClick}
-      className="w-full px-4 py-5 bg-White border-b border-LineGrey flex flex-row gap-3.5 overflow-hidden cursor-pointer last:border-b-0 hover:bg-[#f5f5f5]"
+      className="w-full px-4 py-5 bg-White border-b border-lineGray flex flex-row gap-3.5 overflow-hidden cursor-pointer last:border-b-0 hover:bg-[#f5f5f5]"
     >
       <div className="w-20 h-20 relative flex-shrink-0">
         <Image
@@ -48,7 +48,7 @@ export default function Item({ data }: ItemPropTypes) {
           {restaurant_name}
         </div>
         <div className=" text-TextBlack text-sm font-normal">{menu_name}</div>
-        <div className="text-textLightGrey text-sm font-normal line-clamp-1">
+        <div className="text-textLightGray text-sm font-normal line-clamp-1">
           {recent_message || order_date}
         </div>
       </div>

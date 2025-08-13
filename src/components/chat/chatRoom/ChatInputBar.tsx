@@ -46,7 +46,7 @@ export default function ChatInputBar({
   };
 
   return (
-    <div className="flex items-center justify-center w-full max-w-[600px] bg-white border border-b-0 border-lineGrey px-5 py-3.5">
+    <div className="flex items-center justify-center w-full max-w-[600px] bg-white border border-b-0 border-lineGray px-5 py-3.5">
       <input
         type="file"
         ref={fileInputRef}
@@ -71,7 +71,7 @@ export default function ChatInputBar({
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         onKeyPress={handleKeyPress}
-        className={`w-full h-12 px-5 py-3 text-textBlack text-base font-medium outline-none shadow-inputShadow rounded-[1.25rem] border-[1px] border-lineGrey focus:border-[1px] focus:border-mainColor resize-none flex-1 ${
+        className={`w-full h-12 px-5 py-3 text-textBlack text-base font-medium outline-none shadow-inputShadow rounded-[1.25rem] border-[1px] border-lineGray focus:border-[1px] focus:border-mainColor resize-none flex-1 ${
           disabled ? 'opacity-50 cursor-not-allowed' : ''
         }`}
         disabled={disabled}
@@ -80,7 +80,7 @@ export default function ChatInputBar({
         className={`ml-3 flex h-10 w-10 items-center justify-center rounded-full ${
           message.trim() && !disabled
             ? 'bg-mainColor hover:bg-[#4A66C9]'
-            : 'bg-lineGrey cursor-not-allowed'
+            : 'bg-lineGray cursor-not-allowed'
         }`}
         onClick={handleSendMessage}
         disabled={!message.trim() || disabled}
