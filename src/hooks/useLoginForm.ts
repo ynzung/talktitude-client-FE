@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { postLogin } from '@/api/accountApi';
 
 export const useLoginForm = () => {
   const router = useRouter();
@@ -28,7 +29,12 @@ export const useLoginForm = () => {
       setLoginErrorMessage('아이디 또는 비밀번호를 입력해주세요.');
       return;
     }
-    router.push('/chat/list');
+    try {
+      await postLogin(loginFormData);
+      router.push('/chat/list');
+    } catch (error) {
+      alert(error);
+    }
   };
 
   const handleLoginChange =
