@@ -2,7 +2,7 @@ import React from 'react';
 
 interface ButtonPropTypes {
   disabled?: boolean;
-  onClick: () => void;
+  onClick?: () => void;
   children: React.ReactNode;
 }
 
@@ -13,13 +13,12 @@ export default function Button({
 }: ButtonPropTypes) {
   return (
     <button
-      disabled={disabled}
+      aria-disabled={disabled}
       onClick={onClick}
       className={`
-        flex w-full h-13 py-3.5
+        flex w-full h-14 px-auto py-3.5 rounded-[20px] text-base font-bold 
         justify-center items-center 
-        rounded-[1.25rem] text-lg font-bold
-        ${disabled ? 'bg-textLightGrey cursor-not-allowed' : 'bg-mainColor cursor-pointer hover:bg-[#4A66C9]'}
+        ${disabled ? 'bg-lineGray' : 'bg-mainColor cursor-pointer hover:bg-[#4A66C9]'}
         text-white 
       `}
     >
