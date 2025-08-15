@@ -11,7 +11,22 @@ export const getChatList = async () => {
         Authorization: `Bearer ${accessToken}`,
       },
     });
-    console.log(response.data);
+    console.log('채팅 목록 조회', response.data);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+export const getChatOrderList = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/chat/orders`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    console.log('채팅 생성 전 주문 목록 조회', response.data);
     return response.data;
   } catch (error) {
     console.error(error);
