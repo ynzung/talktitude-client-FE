@@ -25,8 +25,10 @@ export default function ChatNewPage() {
         <div className="mt-5">
           <ChatOrderList items={orderList} />
         </div>
-        <div className="mt-20 text-center underline text-textLightGray text-sm font-bold">
-          <Link href="/chat/:id">주문 말고 다른 문의가 있어요</Link>
+        <div className="mt-20 text-center">
+          <button className="underline text-textLightGray text-sm font-bold">
+            주문 말고 다른 문의가 있어요
+          </button>
         </div>
       </Layout>
     </div>
