@@ -18,3 +18,25 @@ export interface ChatListItemPropsType {
     orderSummary: string;
   }[];
 }
+
+export interface ChatOrderListItemPropsType {
+  orderId: number;
+  restaurantImageUrl: string;
+  restaurantName: string;
+  orderSummary: string;
+  orderDate: string;
+}
+
+export interface ChatItemPropsType {
+  mode: 'chat';
+  chatListData:
+    | ChatListItemPropsType['inProgress'][0]
+    | ChatListItemPropsType['finished'][0];
+  onClickChatItem: () => void;
+}
+
+export interface ChatOrderItemPropsType {
+  mode: 'order';
+  orderData: ChatOrderListItemPropsType;
+  onClickChatItem: () => void;
+}
