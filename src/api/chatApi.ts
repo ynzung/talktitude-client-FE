@@ -33,3 +33,23 @@ export const getChatOrderList = async () => {
     throw error;
   }
 };
+
+// export const postChatCreate = async (orderId: number | null) => {
+//   try {
+//     const response = await axios.post(
+//       `${API_URL}/chat/sessions`,
+//       {
+//         orderId,
+//       },
+//       {
+//         headers: {
+//           Authorization: `Bearer ${accessToken}`,
+//         },
+//       },
+//     );
+//     return response.data;
+//   } catch (error) {
+//     console.error(error);
+//     throw error;
+//   }
+// };
