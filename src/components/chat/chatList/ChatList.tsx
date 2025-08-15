@@ -2,6 +2,7 @@
 
 import Item from '../../ui/Item';
 import { ChatListItemPropsType } from '@/types/chat';
+import { useRouter } from 'next/navigation';
 
 interface ChatListPropTypes {
   title: string;
@@ -9,6 +10,10 @@ interface ChatListPropTypes {
 }
 
 export default function ChatList({ title, items }: ChatListPropTypes) {
+  const router = useRouter();
+  const handleClickChatItem = (sessionId: number) => {
+    router.push(`/chat/${sessionId}`);
+  };
   return (
     <div className="w-full">
       <div className="py-[16px] px-[17px] text-lg font-bold text-textBlack bg-white">
@@ -19,7 +24,12 @@ export default function ChatList({ title, items }: ChatListPropTypes) {
       </div>
       <div className="bg-white">
         {items.map((item, idx) => (
-          <Item key={idx} data={item} />
+          <Item
+            key={idx}
+            mode="chat"
+            chatListData={item}
+            onClickChatItem={() => handleClickChatItem(item.sessionId)}
+          />
         ))}
       </div>
     </div>
