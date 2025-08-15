@@ -7,9 +7,9 @@ export const postLogin = async (data: LoginFormPropsType['loginFormData']) => {
   try {
     const response = await axios.post(`${API_URL}/clients/login`, data);
     console.log(response.data);
-
-    localStorage.setItem('accessToken', response.data.accessToken);
-    localStorage.setItem('refreshToken', response.data.refreshToken);
+    localStorage.clear();
+    localStorage.setItem('accessToken', response.data.data.accessToken);
+    localStorage.setItem('refreshToken', response.data.data.refreshToken);
 
     return response.data;
   } catch (error) {
