@@ -1,16 +1,11 @@
 'use client';
 
 import Item from '../../ui/Item';
+import { ChatListItemPropsType } from '@/types/chat';
 
 interface ChatListPropTypes {
   title: string;
-  items: {
-    id: number;
-    restaurant_image: string;
-    restaurant_name: string;
-    menu_name: string;
-    recent_message: string;
-  }[];
+  items: ChatListItemPropsType['inProgress' | 'finished'];
 }
 
 export default function ChatList({ title, items }: ChatListPropTypes) {
