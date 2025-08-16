@@ -34,22 +34,23 @@ export const getChatOrderList = async () => {
   }
 };
 
-// export const postChatCreate = async (orderId: number | null) => {
-//   try {
-//     const response = await axios.post(
-//       `${API_URL}/chat/sessions`,
-//       {
-//         orderId,
-//       },
-//       {
-//         headers: {
-//           Authorization: `Bearer ${accessToken}`,
-//         },
-//       },
-//     );
-//     return response.data;
-//   } catch (error) {
-//     console.error(error);
-//     throw error;
-//   }
-// };
+export const postChatCreate = async (orderId: number | null) => {
+  try {
+    const response = await axios.post(
+      `${API_URL}/chat/sessions`,
+      {
+        orderId,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      },
+    );
+    console.log('채팅 생성', response.data);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
