@@ -29,7 +29,10 @@ export default function Item(props: ChatItemProps) {
     >
       <div className="w-20 h-20 relative flex-shrink-0">
         <Image
-          src={imageSrc}
+          src={
+            imageSrc ||
+            'https://i.pinimg.com/736x/01/ae/fb/01aefbecec9bf875694c2f5b4dee0117.jpg'
+          }
           alt={`${title} 이미지`}
           width={80}
           height={80}
@@ -38,7 +41,9 @@ export default function Item(props: ChatItemProps) {
         />
       </div>
       <div className="flex flex-col gap-1 justify-center">
-        <div className="text-TextBlack text-lg font-bold">{title}</div>
+        <div className="text-TextBlack text-lg font-bold">
+          {title || '기타 문의'}
+        </div>
         <div className="text-TextBlack text-sm font-normal">{summary}</div>
         <div className="text-textLightGray text-sm font-normal line-clamp-1">
           {subText}
