@@ -4,9 +4,9 @@ import ClientBubble from '@/components/chat/chatRoom/ClientBubble';
 import AgentBubble from '@/components/chat/chatRoom/AgentBubble';
 import ChatInputBar from '@/components/chat/chatRoom/ChatInputBar';
 import Header from '@/components/common/Header';
-import React, { useEffect, useRef, useState } from 'react';
-import { Message, mockMessages } from '@/lib/api/mock/messages';
-import { endedChats } from '@/lib/api/mock/chat';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
+import { ChatMessagePropsType } from '@/types/chat';
+import { getChatMessage } from '@/api/chatApi';
 
 export default function ChatRoomPage({
   params,
@@ -15,26 +15,30 @@ export default function ChatRoomPage({
 }) {
   const resolvedParams = React.use(params);
   const chatEndRef = useRef<HTMLDivElement>(null);
-  const [messages, setMessages] = useState<Message[]>(mockMessages);
-  const isEnded = endedChats.some(
-    (chat) => chat.id === Number(resolvedParams.id),
-  );
+  const [messages, setMessages] = useState<ChatMessagePropsType[]>([]);
 
   const scrollToBottom = () => {
     chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const fetchChatMessage = useCallback(async () => {
+    const response = await getChatMessage(Number(resolvedParams.sessionId));
+    setMessages(response.data);
+  }, [resolvedParams.sessionId]);
+
   useEffect(() => {
     scrollToBottom();
-  }, [messages]);
+    fetchChatMessage();
+  }, [fetchChatMessage]);
 
   const handleSendMessage = (message: string) => {
-    if (isEnded) return;
-
     const newMessage = {
-      id: messages.length + 1,
-      is_mine: true,
-      message,
+      messageId: messages.length + 1,
+      textToShow: message,
+      originalText: message,
+      showOriginal: false,
+      senderType: 'CLIENT',
+      createdAt: new Date().toISOString(),
     };
     setMessages([...messages, newMessage]);
   };
@@ -70,7 +74,7 @@ export default function ChatRoomPage({
       </div>
 
       <div className="fixed bottom-0 w-full max-w-[600px] bg-white">
-        <ChatInputBar onSendMessage={handleSendMessage} disabled={isEnded} />
+        <ChatInputBar onSendMessage={handleSendMessage} />
       </div>
     </div>
   );
