@@ -1,42 +1,50 @@
 'use client';
 
-import ChatBubble from '@/components/chat/chatRoom/ChatBubble';
+import ClientBubble from '@/components/chat/chatRoom/ClientBubble';
+import AgentBubble from '@/components/chat/chatRoom/AgentBubble';
 import ChatInputBar from '@/components/chat/chatRoom/ChatInputBar';
 import Header from '@/components/common/Header';
-import React, { useEffect, useRef, useState } from 'react';
-import { Message, mockMessages } from '@/lib/api/mock/messages';
-import { endedChats } from '@/lib/api/mock/chat';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
+import { ChatMessagePropsType } from '@/types/chat';
+import { getChatMessage } from '@/api/chatApi';
+import { MessageSquarePlus } from 'lucide-react';
 
 export default function ChatRoomPage({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: Promise<{ sessionId: string }>;
 }) {
   const resolvedParams = React.use(params);
   const chatEndRef = useRef<HTMLDivElement>(null);
-  const [messages, setMessages] = useState<Message[]>(mockMessages);
-  const isEnded = endedChats.some(
-    (chat) => chat.id === Number(resolvedParams.id),
-  );
+  const [messages, setMessages] = useState<ChatMessagePropsType[]>([]);
 
   const scrollToBottom = () => {
     chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const fetchChatMessage = useCallback(async () => {
+    const response = await getChatMessage(Number(resolvedParams.sessionId));
+    setMessages(response.data);
+  }, [resolvedParams.sessionId]);
+
   useEffect(() => {
     scrollToBottom();
-  }, [messages]);
+    fetchChatMessage();
+  }, [fetchChatMessage]);
 
   const handleSendMessage = (message: string) => {
-    if (isEnded) return;
-
     const newMessage = {
-      id: messages.length + 1,
-      is_mine: true,
-      message,
+      messageId: messages.length + 1,
+      textToShow: message,
+      originalText: message,
+      showOriginal: false,
+      senderType: 'CLIENT',
+      createdAt: new Date().toISOString(),
     };
     setMessages([...messages, newMessage]);
   };
+
+  const emptyMessage = messages.length === 0;
 
   return (
     <div className="flex flex-col h-[100dvh]">
@@ -47,29 +55,38 @@ export default function ChatRoomPage({
           className="h-full overflow-y-auto bg-bgLightBlue px-[24px] py-2 border border-lr border-t-0 border-lineGray"
           style={{ height: 'calc(100dvh - 177px)' }}
         >
-          <div className="flex flex-col min-h-full">
-            {messages.map((message, index) => {
-              const isLastInGroup =
-                index === messages.length - 1 ||
-                message.is_mine !== messages[index + 1].is_mine;
-
-              return (
-                <ChatBubble
-                  key={message.id}
-                  is_mine={message.is_mine}
-                  isLastInGroup={isLastInGroup}
-                >
-                  {message.message}
-                </ChatBubble>
-              );
-            })}
-            <div ref={chatEndRef}></div>
-          </div>
+          {emptyMessage ? (
+            <div className="flex flex-col justify-center items-center h-full gap-3">
+              <MessageSquarePlus size={45} color="#aaaaaa" />
+              <p className="text-textLightGray text-sm">
+                궁금한 점을 메시지로 남겨주세요.
+              </p>
+            </div>
+          ) : (
+            <div className="flex flex-col min-h-full">
+              {messages.map((message) => {
+                if (message.senderType === 'CLIENT') {
+                  return (
+                    <ClientBubble key={message.messageId}>
+                      {message.textToShow}
+                    </ClientBubble>
+                  );
+                } else {
+                  return (
+                    <AgentBubble key={message.messageId}>
+                      {message.textToShow}
+                    </AgentBubble>
+                  );
+                }
+              })}
+              <div ref={chatEndRef}></div>
+            </div>
+          )}
         </div>
       </div>
 
       <div className="fixed bottom-0 w-full max-w-[600px] bg-white">
-        <ChatInputBar onSendMessage={handleSendMessage} disabled={isEnded} />
+        <ChatInputBar onSendMessage={handleSendMessage} />
       </div>
     </div>
   );

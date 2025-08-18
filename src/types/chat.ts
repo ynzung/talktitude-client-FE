@@ -40,3 +40,12 @@ export interface ChatOrderItemPropsType {
   orderData: ChatOrderListItemPropsType;
   onClickChatItem: () => void;
 }
+
+export interface ChatMessagePropsType {
+  messageId: number;
+  textToShow: string;
+  originalText: string;
+  showOriginal: boolean;
+  senderType: string;
+  createdAt: string;
+}
