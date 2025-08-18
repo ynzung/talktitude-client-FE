@@ -1,6 +1,7 @@
 'use client';
 
-import ChatBubble from '@/components/chat/chatRoom/ChatBubble';
+import ClientBubble from '@/components/chat/chatRoom/ClientBubble';
+import AgentBubble from '@/components/chat/chatRoom/AgentBubble';
 import ChatInputBar from '@/components/chat/chatRoom/ChatInputBar';
 import Header from '@/components/common/Header';
 import React, { useEffect, useRef, useState } from 'react';
@@ -48,20 +49,20 @@ export default function ChatRoomPage({
           style={{ height: 'calc(100dvh - 177px)' }}
         >
           <div className="flex flex-col min-h-full">
-            {messages.map((message, index) => {
-              const isLastInGroup =
-                index === messages.length - 1 ||
-                message.is_mine !== messages[index + 1].is_mine;
-
-              return (
-                <ChatBubble
-                  key={message.id}
-                  is_mine={message.is_mine}
-                  isLastInGroup={isLastInGroup}
-                >
-                  {message.message}
-                </ChatBubble>
-              );
+            {messages.map((message) => {
+              if (message.senderType === 'CLIENT') {
+                return (
+                  <ClientBubble key={message.messageId}>
+                    {message.textToShow}
+                  </ClientBubble>
+                );
+              } else {
+                return (
+                  <AgentBubble key={message.messageId}>
+                    {message.textToShow}
+                  </AgentBubble>
+                );
+              }
             })}
             <div ref={chatEndRef}></div>
           </div>
