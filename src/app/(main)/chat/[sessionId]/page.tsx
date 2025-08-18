@@ -11,7 +11,7 @@ import { endedChats } from '@/lib/api/mock/chat';
 export default function ChatRoomPage({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: Promise<{ sessionId: string }>;
 }) {
   const resolvedParams = React.use(params);
   const chatEndRef = useRef<HTMLDivElement>(null);
