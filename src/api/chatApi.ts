@@ -54,3 +54,21 @@ export const postChatCreate = async (orderId: number | null) => {
     throw error;
   }
 };
+
+export const getChatMessage = async (sessionId: number) => {
+  try {
+    const response = await axios.get(
+      `${API_URL}/chat/sessions/${sessionId}/messages`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      },
+    );
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
