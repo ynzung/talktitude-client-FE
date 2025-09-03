@@ -29,8 +29,18 @@ export const getChatOrderList = async () => {
     console.log('채팅 생성 전 주문 목록 조회', response.data);
     return response.data;
   } catch (error) {
+    if (axios.isAxiosError(error)) {
+      if (error.response && error.response.status === 404) {
+        console.log('결제 정보 또는 메뉴 정보를 찾을 수 없습니다.');
+        return {
+          data: [],
+        };
+      }
+    }
     console.error(error);
-    throw error;
+    return {
+      data: [],
+    };
   }
 };
 
