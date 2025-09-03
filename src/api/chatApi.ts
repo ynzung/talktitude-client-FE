@@ -82,3 +82,21 @@ export const getChatMessage = async (sessionId: number) => {
     throw error;
   }
 };
+
+export const getChatHeaderInfo = async (sessionId: number) => {
+  try {
+    const response = await axios.get(
+      `${API_URL}/chat/client/sessions/${sessionId}/header`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      },
+    );
+    // console.log('상담 헤더 정보 조회', response.data);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};

@@ -1,36 +1,40 @@
 'use client';
 
-import ClientBubble from '@/components/chat/chatRoom/ClientBubble';
-import AgentBubble from '@/components/chat/chatRoom/AgentBubble';
 import ChatInputBar from '@/components/chat/chatRoom/ChatInputBar';
 import Header from '@/components/common/Header';
 import React, { useEffect, useRef, useState, useCallback } from 'react';
-import { ChatMessagePropsType } from '@/types/chat';
-import { getChatMessage } from '@/api/chatApi';
-import { MessageSquarePlus } from 'lucide-react';
+import { useParams } from 'next/navigation';
+import { ChatMessagePropsType, ChatHeaderInfoPropsType } from '@/types/chat';
+import { getChatMessage, getChatHeaderInfo } from '@/api/chatApi';
+import ChatPanel from '@/components/chat/chatRoom/ChatPanel';
 
-export default function ChatRoomPage({
-  params,
-}: {
-  params: Promise<{ sessionId: string }>;
-}) {
-  const resolvedParams = React.use(params);
+export default function ChatRoomPage() {
+  const { sessionId } = useParams();
   const chatEndRef = useRef<HTMLDivElement>(null);
   const [messages, setMessages] = useState<ChatMessagePropsType[]>([]);
+  const [headerInfo, setHeaderInfo] = useState<ChatHeaderInfoPropsType>({
+    title: '',
+  });
 
   const scrollToBottom = () => {
     chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const fetchChatMessage = useCallback(async () => {
-    const response = await getChatMessage(Number(resolvedParams.sessionId));
+    const response = await getChatMessage(Number(sessionId));
     setMessages(response.data);
-  }, [resolvedParams.sessionId]);
+  }, [sessionId]);
+
+  const fetchChatHeaderInfo = useCallback(async () => {
+    const response = await getChatHeaderInfo(Number(sessionId));
+    setHeaderInfo(response.data);
+  }, [sessionId]);
 
   useEffect(() => {
     scrollToBottom();
     fetchChatMessage();
-  }, [fetchChatMessage]);
+    fetchChatHeaderInfo();
+  }, [fetchChatMessage, fetchChatHeaderInfo]);
 
   const handleSendMessage = (message: string) => {
     const newMessage = {
@@ -44,47 +48,10 @@ export default function ChatRoomPage({
     setMessages([...messages, newMessage]);
   };
 
-  const emptyMessage = messages.length === 0;
-
   return (
     <div className="flex flex-col h-[100dvh]">
-      <Header isChat={true}>구공분식 강남점</Header>
-
-      <div className="pt-28 pb-14">
-        <div
-          className="h-full overflow-y-auto bg-bgLightBlue px-[24px] py-2 border border-lr border-t-0 border-lineGray"
-          style={{ height: 'calc(100dvh - 177px)' }}
-        >
-          {emptyMessage ? (
-            <div className="flex flex-col justify-center items-center h-full gap-3">
-              <MessageSquarePlus size={45} color="#aaaaaa" />
-              <p className="text-textLightGray text-sm">
-                궁금한 점을 메시지로 남겨주세요.
-              </p>
-            </div>
-          ) : (
-            <div className="flex flex-col min-h-full">
-              {messages.map((message) => {
-                if (message.senderType === 'CLIENT') {
-                  return (
-                    <ClientBubble key={message.messageId}>
-                      {message.textToShow}
-                    </ClientBubble>
-                  );
-                } else {
-                  return (
-                    <AgentBubble key={message.messageId}>
-                      {message.textToShow}
-                    </AgentBubble>
-                  );
-                }
-              })}
-              <div ref={chatEndRef}></div>
-            </div>
-          )}
-        </div>
-      </div>
-
+      <Header isChat={true}>{headerInfo.title}</Header>
+      <ChatPanel messages={messages} chatEndRef={chatEndRef} />
       <div className="fixed bottom-0 w-full max-w-[600px] bg-white">
         <ChatInputBar onSendMessage={handleSendMessage} />
       </div>
