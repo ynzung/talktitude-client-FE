@@ -49,3 +49,8 @@ export interface ChatMessagePropsType {
   senderType: string;
   createdAt: string;
 }
+
+export interface ChatPanelPropsType {
+  messages: ChatMessagePropsType[];
+  chatEndRef: React.RefObject<HTMLDivElement>;
+}
