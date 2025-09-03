@@ -54,3 +54,7 @@ export interface ChatPanelPropsType {
   messages: ChatMessagePropsType[];
   chatEndRef: React.RefObject<HTMLDivElement>;
 }
+
+export interface ChatHeaderInfoPropsType {
+  title: string;
+}
