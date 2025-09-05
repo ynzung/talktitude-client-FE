@@ -1,17 +1,26 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { MessageSquarePlus } from 'lucide-react';
 import ClientBubble from './ClientBubble';
 import AgentBubble from './AgentBubble';
 import { ChatMessagePropsType } from '@/types/chat';
-import { RefObject } from 'react';
 
-interface ChatPanelProps {
+interface ChatRoomProps {
   messages: ChatMessagePropsType[];
-  chatEndRef: RefObject<HTMLDivElement | null>;
 }
 
-export default function ChatPanel({ messages, chatEndRef }: ChatPanelProps) {
+export default function ChatRoom({ messages }: ChatRoomProps) {
+  const chatEndRef = useRef<HTMLDivElement | null>(null);
+
+  const scrollToBottom = () => {
+    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
   const emptyMessage = messages.length === 0;
+
   return (
     <div className="pt-28 pb-14">
       <div

@@ -1,5 +1,5 @@
-import { PLACEHOLDERS } from '@/lib/constants/placeholders';
 import React, { useRef, useState } from 'react';
+import { PLACEHOLDERS } from '@/lib/constants/placeholders';
 import { IoMdArrowRoundUp } from 'react-icons/io';
 import { LuImagePlus } from 'react-icons/lu';
 
@@ -26,13 +26,11 @@ export default function ChatInputBar({
     if (!file) return;
 
     console.log('선택된 이미지:', file);
-
     e.target.value = '';
   };
 
   const handleSendMessage = () => {
     if (disabled || !message.trim()) return;
-
     onSendMessage(message);
     setMessage('');
   };
