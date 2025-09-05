@@ -11,7 +11,7 @@ export const getChatList = async () => {
         Authorization: `Bearer ${accessToken}`,
       },
     });
-    console.log('채팅 목록 조회', response.data);
+    // console.log('채팅 목록 조회', response.data);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -26,7 +26,7 @@ export const getChatOrderList = async () => {
         Authorization: `Bearer ${accessToken}`,
       },
     });
-    console.log('채팅 생성 전 주문 목록 조회', response.data);
+    // console.log('채팅 생성 전 주문 목록 조회', response.data);
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
