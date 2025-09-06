@@ -10,7 +10,7 @@ interface ChatInputBarProps {
 
 export default function ChatInputBar({
   onSendMessage,
-  disabled = false,
+  disabled,
 }: ChatInputBarProps) {
   const [message, setMessage] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
