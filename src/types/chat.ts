@@ -57,4 +57,5 @@ export interface ChatPanelPropsType {
 
 export interface ChatHeaderInfoPropsType {
   title: string;
+  status: string;
 }

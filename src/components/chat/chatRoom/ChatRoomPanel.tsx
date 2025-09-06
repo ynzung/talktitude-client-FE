@@ -14,9 +14,7 @@ export default function ChatRoomPanel() {
   const sid = Number(sessionId);
 
   const [messages, setMessages] = useState<ChatMessagePropsType[]>([]);
-  const [headerInfo, setHeaderInfo] = useState<ChatHeaderInfoPropsType>({
-    title: '',
-  });
+  const [headerInfo, setHeaderInfo] = useState<ChatHeaderInfoPropsType>();
 
   // 1) 초기 메시지 목록 조회
   const fetchChatMessage = useCallback(async () => {
@@ -45,8 +43,19 @@ export default function ChatRoomPanel() {
     setMessages((prev) => [...prev, msg as ChatMessagePropsType]);
   }, []);
 
+  const handleStatus = useCallback(
+    (s: { sessionId: number; status: string }) => {
+      if (sid == null) return;
+      if (s.sessionId !== sid) return;
+    },
+    [sid],
+  );
+
   // 4) 소켓 훅 (연결,전송)
-  const { connected, sendMessage } = useChatSocket(handleReceive);
+  const { connected, sendMessage, finishedChat } = useChatSocket(
+    handleReceive,
+    handleStatus,
+  );
 
   useEffect(() => {
     fetchChatMessage();
@@ -64,15 +73,16 @@ export default function ChatRoomPanel() {
     });
   };
 
+  const headerFinished = headerInfo?.status === 'FINISHED';
+
+  const disabled = !connected || !sid || finishedChat || headerFinished;
+
   return (
     <div>
-      <Header isChat>{headerInfo.title}</Header>
+      <Header isChat>{headerInfo?.title}</Header>
       <ChatRoom messages={messages} />
       <div className="fixed bottom-0 w-full max-w-[600px] bg-white">
-        <ChatInputBar
-          onSendMessage={handleSendMessage}
-          disabled={!connected || !sid}
-        />
+        <ChatInputBar onSendMessage={handleSendMessage} disabled={disabled} />
       </div>
     </div>
   );
