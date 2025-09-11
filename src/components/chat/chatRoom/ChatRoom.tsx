@@ -39,7 +39,12 @@ export default function ChatRoom({ messages }: ChatRoomProps) {
             {messages.map((message) => {
               if (message.senderType === 'CLIENT') {
                 return (
-                  <ClientBubble key={message.messageId}>
+                  <ClientBubble
+                    key={
+                      message.isTemporary ? message.tempId : message.messageId
+                    }
+                    message={message}
+                  >
                     {message.textToShow}
                   </ClientBubble>
                 );
