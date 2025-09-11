@@ -48,6 +48,9 @@ export interface ChatMessagePropsType {
   showOriginal: boolean;
   senderType: string;
   createdAt: string;
+  isTemporary: boolean;
+  tempId: string;
+  status: string;
 }
 
 export interface ChatPanelPropsType {

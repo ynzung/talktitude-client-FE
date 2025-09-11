@@ -40,9 +40,21 @@ export default function ChatRoomPanel() {
 
   // 3) 소켓 수신
   const handleReceive = useCallback((msg: unknown) => {
-    setMessages((prev) => [...prev, msg as ChatMessagePropsType]);
-  }, []);
+    const receivedMsg = msg as ChatMessagePropsType;
 
+    setMessages((prev) => {
+      // 임시 메시지가 있다면 실제 메시지로 교체
+      const hasTemporary = prev.some((m) => m.isTemporary);
+
+      if (hasTemporary) {
+        // 임시 메시지 제거하고 실제 메시지 추가
+        return prev.filter((m) => !m.isTemporary).concat(receivedMsg);
+      } else {
+        // 서버에서 받은 메시지 추가
+        return [...prev, receivedMsg];
+      }
+    });
+  }, []);
   const handleStatus = useCallback(
     (s: { sessionId: number; status: string }) => {
       if (sid == null) return;
@@ -62,9 +74,26 @@ export default function ChatRoomPanel() {
     fetchChatHeaderInfo();
   }, [fetchChatMessage, fetchChatHeaderInfo]);
 
-  // 5) 소켓 송신: 소켓 publish만 (서버에서 응답받을 때만 UI 업데이트)
+  // 5) 소켓 송신: 소켓 publish만
   const handleSendMessage = (text: string) => {
     if (!sid) return;
+
+    const tempId = `temp_${Date.now()}_${Math.random()}`;
+
+    // UI에 임시 메시지 표시
+    const tempMessage: ChatMessagePropsType = {
+      messageId: -1, // 임시 ID 부여
+      textToShow: text,
+      originalText: text,
+      showOriginal: false,
+      senderType: 'CLIENT',
+      createdAt: new Date().toISOString(),
+      isTemporary: true,
+      status: 'sending',
+      tempId,
+    };
+
+    setMessages((prev) => [...prev, tempMessage]);
 
     sendMessage({
       originalText: text,
