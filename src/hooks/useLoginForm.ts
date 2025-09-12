@@ -3,15 +3,19 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { postLogin } from '@/api/accountApi';
+import { useLoading } from './useLoading';
 
 export const useLoginForm = () => {
   const router = useRouter();
+  const { isLoading, withLoading } = useLoading();
   const [loginFormData, setLoginFormData] = useState({
     loginId: '',
     password: '',
   });
   const disabled =
-    loginFormData.loginId.trim() === '' || loginFormData.password.trim() === '';
+    loginFormData.loginId.trim() === '' ||
+    loginFormData.password.trim() === '' ||
+    isLoading;
   const [keepLoggedIn, setKeepLoggedIn] = useState(false);
   const [loginErrorMessage, setLoginErrorMessage] = useState('');
 
@@ -29,12 +33,14 @@ export const useLoginForm = () => {
       setLoginErrorMessage('아이디 또는 비밀번호를 입력해주세요.');
       return;
     }
-    try {
-      await postLogin(loginFormData);
-      router.push('/chat/list');
-    } catch (error) {
-      alert(error);
-    }
+    await withLoading(async () => {
+      try {
+        postLogin(loginFormData);
+        router.push('/chat/list');
+      } catch (error) {
+        alert(error);
+      }
+    });
   };
 
   const handleLoginChange =
@@ -54,6 +60,7 @@ export const useLoginForm = () => {
     disabled,
     keepLoggedIn,
     loginErrorMessage,
+    isLoading,
     handleKeepLoggedInClick,
     handleLogin,
     handleLoginChange,

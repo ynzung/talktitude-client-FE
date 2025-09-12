@@ -6,6 +6,7 @@ import InputField from './InputField';
 import RememberBox from './RememberBox';
 import { PLACEHOLDERS } from '@/lib/constants/placeholders';
 import { LoginFormPropsType } from '@/types/auth';
+import LoadingSpinner from '@/components/common/loading/LoadingSpinner';
 
 const LoginForm = ({
   loginFormData,
@@ -15,6 +16,7 @@ const LoginForm = ({
   handleKeepLoggedInClick,
   disabled,
   loginErrorMessage,
+  isLoading = false,
 }: LoginFormPropsType) => {
   return (
     <form onSubmit={onSubmit} className="flex flex-col gap-4 w-[22.4375rem]">
@@ -41,7 +43,16 @@ const LoginForm = ({
           {loginErrorMessage}
         </p>
       )}
-      <Button disabled={disabled}>로그인</Button>
+      <Button type="submit" disabled={disabled}>
+        {isLoading ? (
+          <div className="flex items-center justify-center gap-2">
+            <LoadingSpinner size="sm" color="white" />
+            로그인 중...
+          </div>
+        ) : (
+          '로그인'
+        )}
+      </Button>
     </form>
   );
 };

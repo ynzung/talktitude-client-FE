@@ -13,6 +13,7 @@ export default function LoginPage() {
     disabled,
     keepLoggedIn,
     loginErrorMessage,
+    isLoading,
     handleKeepLoggedInClick,
     handleLogin,
     handleLoginChange,
@@ -35,6 +36,7 @@ export default function LoginPage() {
           handleKeepLoggedInClick={handleKeepLoggedInClick}
           disabled={disabled}
           loginErrorMessage={loginErrorMessage}
+          isLoading={isLoading}
         />
         <FooterLinks />
       </div>
