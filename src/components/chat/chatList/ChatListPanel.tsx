@@ -28,14 +28,14 @@ const ChatListPanel = () => {
   return (
     <div>
       {empty ? (
-        <div className="h-screen flex flex-col items-center justify-center gap-3 border border-x border-lineGray">
+        <div className="h-screen flex flex-col items-center justify-center gap-3">
           <PiChats size={45} color="#949494" />
           <div className="text-center text-textLightGray text-sm font-medium">
             궁금한 점이 있으신가요? 지금 바로 상담을 시작해 보세요.
           </div>
         </div>
       ) : (
-        <Layout padding="pt-14 pb-40 border-x border-lineGray">
+        <Layout padding="pt-14 pb-40">
           {inProgressList.length > 0 && (
             <div className="mt-5">
               <ChatList title="상담중" items={inProgressList} />

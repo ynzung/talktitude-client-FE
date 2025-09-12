@@ -1,11 +1,16 @@
 import axios from 'axios';
 
 const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
-const accessToken =
-  typeof window !== 'undefined' ? localStorage.getItem('accessToken') : null;
+
+const getAccessToken = () => {
+  return typeof window !== 'undefined'
+    ? localStorage.getItem('accessToken')
+    : null;
+};
 
 export const getChatList = async () => {
   try {
+    const accessToken = getAccessToken();
     const response = await axios.get(`${API_URL}/chat/client/sessions`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -21,6 +26,7 @@ export const getChatList = async () => {
 
 export const getChatOrderList = async () => {
   try {
+    const accessToken = getAccessToken();
     const response = await axios.get(`${API_URL}/chat/orders`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -46,6 +52,7 @@ export const getChatOrderList = async () => {
 
 export const postChatCreate = async (orderId: number | null) => {
   try {
+    const accessToken = getAccessToken();
     const response = await axios.post(
       `${API_URL}/chat/sessions`,
       {
@@ -67,6 +74,7 @@ export const postChatCreate = async (orderId: number | null) => {
 
 export const getChatMessage = async (sessionId: number) => {
   try {
+    const accessToken = getAccessToken();
     const response = await axios.get(
       `${API_URL}/chat/sessions/${sessionId}/messages`,
       {
@@ -85,6 +93,7 @@ export const getChatMessage = async (sessionId: number) => {
 
 export const getChatHeaderInfo = async (sessionId: number) => {
   try {
+    const accessToken = getAccessToken();
     const response = await axios.get(
       `${API_URL}/chat/client/sessions/${sessionId}/header`,
       {

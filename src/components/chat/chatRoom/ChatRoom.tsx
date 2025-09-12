@@ -24,7 +24,7 @@ export default function ChatRoom({ messages }: ChatRoomProps) {
   return (
     <div className="pt-28 pb-14">
       <div
-        className="h-full overflow-y-auto bg-bgLightBlue px-[24px] py-2 border border-lr border-t-0 border-lineGray"
+        className="h-full overflow-y-auto bg-bgLightBlue px-[24px] py-2"
         style={{ height: 'calc(100dvh - 177px)' }}
       >
         {emptyMessage ? (

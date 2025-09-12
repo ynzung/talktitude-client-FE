@@ -9,11 +9,10 @@ export const postLogin = async (data: LoginFormPropsType['loginFormData']) => {
     console.log(response.data);
     localStorage.clear();
     localStorage.setItem('accessToken', response.data.data.accessToken);
-    localStorage.setItem('refreshToken', response.data.data.refreshToken);
+    // localStorage.setItem('refreshToken', response.data.data.refreshToken);
 
     return response.data;
   } catch (error) {
-    console.error(error);
     if (axios.isAxiosError(error)) {
       const status = error.response?.status;
       const message = error.response?.data?.message;

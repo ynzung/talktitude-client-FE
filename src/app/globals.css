@@ -18,7 +18,7 @@
 }
 
 html {
-  background-color: #ffffff;
+  background-color: #e6e6e6;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -52,4 +52,15 @@ body {
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+/* 로딩 애니메이션 */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
 }
