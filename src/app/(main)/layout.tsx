@@ -35,7 +35,7 @@ export default function MainLayout({
           <>
             <Link
               href="/"
-              className="flex items-center justify-center w-full bg-mainColor hover:bg-[#4A66C9] text-white font-semibold py-3 px-auto rounded-2xl transition-colors duration-200"
+              className="flex items-center justify-center w-full bg-mainColor hover:bg-[#4A66C9] text-white font-semibold py-3.5 px-auto rounded-2xl transition-colors duration-200"
             >
               로그인 페이지로 이동
             </Link>
