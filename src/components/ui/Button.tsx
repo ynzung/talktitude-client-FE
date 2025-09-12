@@ -1,18 +1,21 @@
 import React from 'react';
 
 interface ButtonPropTypes {
+  type?: 'button' | 'submit' | 'reset';
   disabled?: boolean;
   onClick?: () => void;
   children: React.ReactNode;
 }
 
 export default function Button({
+  type,
   disabled,
   onClick,
   children,
 }: ButtonPropTypes) {
   return (
     <button
+      type={type}
       aria-disabled={disabled}
       onClick={onClick}
       className={`
