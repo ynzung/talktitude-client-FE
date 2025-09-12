@@ -17,7 +17,7 @@ export default function ChatListPage() {
     <div className="bg-bgLightBlue">
       <Header isChat={false} />
       <ChatListPanel />
-      <div className="fixed w-full max-w-[600px] bottom-0 bg-bgLightBlue p-4 z-10 border-x border-lineGray">
+      <div className="fixed w-full max-w-[600px] bottom-0 bg-bgLightBlue p-4 z-10 ">
         <Button onClick={handleStartChat}>상담 시작하기</Button>
       </div>
     </div>
