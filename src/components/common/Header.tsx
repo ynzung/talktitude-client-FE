@@ -18,6 +18,11 @@ export default function Header({
     router.push('/chat/list');
   };
 
+  const handleClearStorage = () => {
+    localStorage.clear();
+    router.push('/');
+  };
+
   return (
     <div className="w-full max-w-[600px] fixed z-10">
       <div className=" h-14 bg-mainColor flex items-center justify-start px-[22px]">
@@ -27,6 +32,12 @@ export default function Header({
           width={140}
           height={29}
           priority
+        />
+        <button
+          onClick={handleClearStorage}
+          // className="absolute right-2 top-2 w-2 h-2 bg-white/20 rounded-full hover:bg-white/40 transition-colors"
+          className="absolute right-2 top-2 w-2 h-2 bg-transparent rounded-full hover:bg-white/40 transition-colors"
+          title="로컬스토리지 클리어 버튼"
         />
       </div>
       {isChat && (
