@@ -35,7 +35,7 @@ export const useLoginForm = () => {
     }
     await withLoading(async () => {
       try {
-        postLogin(loginFormData);
+        await postLogin(loginFormData);
         router.push('/chat/list');
       } catch (error) {
         alert(error);
