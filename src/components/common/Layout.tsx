@@ -21,7 +21,7 @@ export default function Layout({
     if (scrollToTop) window.scrollTo(0, 0);
   }, [scrollToTop]);
 
-  const baseClass = `w-full max-w-[600px] min-h-screen ${padding}`;
+  const baseClass = `w-full max-w-[600px] min-h-[100dvh] ${padding}`;
   const centerClass = center
     ? `flex flex-col justify-center items-center ${gap}`
     : '';
