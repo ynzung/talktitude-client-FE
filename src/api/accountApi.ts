@@ -13,7 +13,6 @@ export const postLogin = async (data: LoginFormPropsType['loginFormData']) => {
 
     return response.data;
   } catch (error) {
-    console.error(error);
     if (axios.isAxiosError(error)) {
       const status = error.response?.status;
       const message = error.response?.data?.message;
