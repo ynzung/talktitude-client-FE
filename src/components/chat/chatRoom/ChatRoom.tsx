@@ -40,7 +40,11 @@ export default function ChatRoom({ messages }: ChatRoomProps) {
                     }
                     message={message}
                   >
-                    {message.textToShow}
+                    {message.medias && message.medias.length > 0 ? (
+                      <ClientMedias medias={message.medias} />
+                    ) : (
+                      message.textToShow
+                    )}
                   </ClientBubble>
                 );
               } else {
