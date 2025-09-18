@@ -62,7 +62,7 @@ export default function ChatInputBar({
         />
       )}
       <div className="flex flex-col w-full max-w-[600px] bg-white opacity-100 border-t border-lineGray px-5 py-3.5">
-        <div className="flex items-center justify-center w-full">
+        <div className="flex items-center justify-center w-full gap-3">
           <input
             type="file"
             ref={fileInputRef}
