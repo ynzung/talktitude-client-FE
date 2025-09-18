@@ -1,7 +1,9 @@
 import React, { useRef, useState } from 'react';
+import { useParams } from 'next/navigation';
 import { PLACEHOLDERS } from '@/lib/constants/placeholders';
 import { IoMdArrowRoundUp } from 'react-icons/io';
 import { LuImagePlus } from 'react-icons/lu';
+import { postChatMedia } from '@/api/chatApi';
 
 interface ChatInputBarProps {
   onSendMessage: (message: string) => void;
@@ -14,6 +16,7 @@ export default function ChatInputBar({
 }: ChatInputBarProps) {
   const [message, setMessage] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const { sessionId } = useParams();
 
   const handleImageUpload = () => {
     if (disabled) return;
@@ -24,9 +27,8 @@ export default function ChatInputBar({
     if (disabled) return;
     const file = e.target.files?.[0];
     if (!file) return;
-
-    console.log('선택된 이미지:', file);
     e.target.value = '';
+    postChatMedia(Number(sessionId), file);
   };
 
   const handleSendMessage = () => {
