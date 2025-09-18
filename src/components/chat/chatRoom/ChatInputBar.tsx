@@ -3,7 +3,7 @@ import { useParams } from 'next/navigation';
 import { PLACEHOLDERS } from '@/lib/constants/placeholders';
 import ChatInputBtn from './ChatInputBtn';
 import ImagePreview from './ImagePreview';
-import useSendImage from '@/hooks/useSendImage';
+import useSendImage from '@/hooks/chat/useSendImage';
 
 interface ChatInputBarProps {
   onSendMessage: (message: string) => void;

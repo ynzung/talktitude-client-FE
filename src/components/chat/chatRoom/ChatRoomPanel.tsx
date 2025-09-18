@@ -7,7 +7,7 @@ import ChatRoom from './ChatRoom';
 import ChatInputBar from '@/components/chat/chatRoom/ChatInputBar';
 import { ChatMessagePropsType, ChatHeaderInfoPropsType } from '@/types/chat';
 import { getChatMessage, getChatHeaderInfo } from '@/api/chatApi';
-import { useChatSocket } from '@/hooks/useChatSocket';
+import { useChatSocket } from '@/hooks/chat/useChatSocket';
 
 export default function ChatRoomPanel() {
   const { sessionId } = useParams();
