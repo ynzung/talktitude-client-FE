@@ -1,9 +1,9 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import { PLACEHOLDERS } from '@/lib/constants/placeholders';
-import { IoMdArrowRoundUp } from 'react-icons/io';
-import { LuImagePlus } from 'react-icons/lu';
+import ChatInputBtn from './ChatInputBtn';
 import { postChatMedia } from '@/api/chatApi';
+import ImagePreview from './ImagePreview';
 
 interface ChatInputBarProps {
   onSendMessage: (message: string) => void;
@@ -17,6 +17,8 @@ export default function ChatInputBar({
   const [message, setMessage] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { sessionId } = useParams();
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
   const handleImageUpload = () => {
     if (disabled) return;
@@ -28,11 +30,42 @@ export default function ChatInputBar({
     const file = e.target.files?.[0];
     if (!file) return;
     e.target.value = '';
-    postChatMedia(Number(sessionId), file);
+    setSelectedFile(file);
+    const objectUrl = URL.createObjectURL(file);
+    setPreviewUrl(objectUrl);
+  };
+
+  // 선택 해제 시 미리보기 URL revoke
+  useEffect(() => {
+    return () => {
+      if (previewUrl) URL.revokeObjectURL(previewUrl);
+    };
+  }, [previewUrl]);
+
+  const handleCancelPreview = () => {
+    if (previewUrl) URL.revokeObjectURL(previewUrl);
+    setPreviewUrl(null);
+    setSelectedFile(null);
+  };
+
+  const handleConfirmSendImage = async () => {
+    if (disabled || !selectedFile) return;
+    try {
+      await postChatMedia(Number(sessionId), selectedFile);
+    } finally {
+      handleCancelPreview();
+    }
   };
 
   const handleSendMessage = () => {
-    if (disabled || !message.trim()) return;
+    if (disabled) return;
+    // 이미지가 선택되어 있으면 이미지 전송 우선
+    if (selectedFile) {
+      handleConfirmSendImage();
+      setMessage('');
+      return;
+    }
+    if (!message.trim()) return;
     onSendMessage(message);
     setMessage('');
   };
@@ -46,47 +79,53 @@ export default function ChatInputBar({
   };
 
   return (
-    <div className="flex items-center justify-center w-full max-w-[600px] bg-white border-t border-lineGray px-5 py-3.5">
-      <input
-        type="file"
-        ref={fileInputRef}
-        onChange={handleFileChange}
-        accept="image/*"
-        className="hidden"
-        disabled={disabled}
-      />
-      <button
-        className={`bg-[#EEEEEE] flex items-center justify-center rounded-full w-10 h-10 mr-3 ${
-          disabled ? 'opacity-50 cursor-not-allowed' : 'hover:bg-[#E0E0E0]'
-        }`}
-        onClick={handleImageUpload}
-        disabled={disabled}
-      >
-        <LuImagePlus size={30} color="#3b3b3b" />
-      </button>
-      <input
-        placeholder={
-          disabled ? PLACEHOLDERS.CHAT_INPUT_DISABLED : PLACEHOLDERS.CHAT_INPUT
-        }
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-        onKeyPress={handleKeyPress}
-        className={`w-full h-12 px-5 py-3 text-textBlack text-base font-medium outline-none shadow-inputShadow rounded-[1.25rem] border-[1px] border-lineGray focus:border-[1px] focus:border-mainColor resize-none flex-1 ${
-          disabled ? 'opacity-50 cursor-not-allowed' : ''
-        }`}
-        disabled={disabled}
-      />
-      <button
-        className={`ml-3 flex h-10 w-10 items-center justify-center rounded-full ${
-          message.trim() && !disabled
-            ? 'bg-mainColor hover:bg-[#4A66C9]'
-            : 'bg-lineGray cursor-not-allowed'
-        }`}
-        onClick={handleSendMessage}
-        disabled={!message.trim() || disabled}
-      >
-        <IoMdArrowRoundUp size={30} color="white" />
-      </button>
-    </div>
+    <>
+      {previewUrl && (
+        <ImagePreview
+          previewUrl={previewUrl}
+          disabled={disabled}
+          onCancel={handleCancelPreview}
+        />
+      )}
+      <div className="flex flex-col w-full max-w-[600px] bg-white opacity-100 border-t border-lineGray px-5 py-3.5">
+        <div className="flex items-center justify-center w-full">
+          <input
+            type="file"
+            ref={fileInputRef}
+            onChange={handleFileChange}
+            accept="image/*"
+            className="hidden"
+            disabled={disabled}
+          />
+          <ChatInputBtn
+            variant="upload"
+            disabled={disabled}
+            onClick={handleImageUpload}
+          />
+          <input
+            placeholder={
+              disabled
+                ? PLACEHOLDERS.CHAT_INPUT_DISABLED
+                : selectedFile
+                  ? '이미지 전송'
+                  : PLACEHOLDERS.CHAT_INPUT
+            }
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            onKeyPress={handleKeyPress}
+            className={`w-full h-12 px-5 py-3 text-textBlack text-base font-medium outline-none shadow-inputShadow rounded-[1.25rem] border-[1px] border-lineGray focus:border-[1px] focus:border-mainColor resize-none flex-1 ${
+              disabled || selectedFile ? 'opacity-50 cursor-not-allowed' : ''
+            }`}
+            disabled={disabled || !!selectedFile}
+          />
+          <ChatInputBtn
+            variant="send"
+            active={!!(message.trim() || selectedFile) && !disabled}
+            disabled={(!message.trim() && !selectedFile) || disabled}
+            onClick={handleSendMessage}
+          />
+        </div>
+      </div>
+    </>
   );
 }
