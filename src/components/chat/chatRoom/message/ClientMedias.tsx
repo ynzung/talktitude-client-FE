@@ -3,8 +3,8 @@ import React from 'react';
 export function ClientMedias({ medias }: { medias: { url: string }[] }) {
   return (
     <div className="flex flex-col gap-2">
-      {medias.map((m, i) => (
-        <div key={i}>
+      {medias.map((m) => (
+        <div key={m.url}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={m.url}
