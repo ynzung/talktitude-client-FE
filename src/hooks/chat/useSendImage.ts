@@ -11,11 +11,6 @@ export default function useSendImage(sessionId: number, disabled?: boolean) {
     if (!file) return;
     e.target.value = '';
 
-    // 이전 미리보기 URL 정리
-    if (previewUrl) {
-      URL.revokeObjectURL(previewUrl);
-    }
-
     const isHeic =
       /(heic|heif)/i.test(file.type) ||
       /\.(heic|heif)(?:$|\?)/i.test(file.name);
