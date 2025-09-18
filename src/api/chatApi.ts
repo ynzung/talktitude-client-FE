@@ -109,3 +109,34 @@ export const getChatHeaderInfo = async (sessionId: number) => {
     throw error;
   }
 };
+
+export const postChatMedia = async (sessionId: number, file: File) => {
+  try {
+    const accessToken = getAccessToken();
+    const formData = new FormData();
+    formData.append('file', file);
+
+    const response = await axios.post(
+      `${API_URL}/chat/${sessionId}/media`,
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      },
+    );
+    console.log('사진 전송', response.data);
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.error('postChatMedia error:', {
+        status: error.response?.status,
+        data: error.response?.data,
+        headers: error.response?.headers,
+      });
+    } else {
+      console.error('postChatMedia error (unknown):', error);
+    }
+    throw error;
+  }
+};
