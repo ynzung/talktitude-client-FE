@@ -1,9 +1,9 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { PLACEHOLDERS } from '@/lib/constants/placeholders';
 import ChatInputBtn from './ChatInputBtn';
-import { postChatMedia } from '@/api/chatApi';
 import ImagePreview from './ImagePreview';
+import useSendImage from '@/hooks/useSendImage';
 
 interface ChatInputBarProps {
   onSendMessage: (message: string) => void;
@@ -17,44 +17,18 @@ export default function ChatInputBar({
   const [message, setMessage] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { sessionId } = useParams();
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const sessionIdNumber = Number(sessionId);
+  const {
+    selectedFile,
+    previewUrl,
+    handleFileChange,
+    handleCancelPreview,
+    handleConfirmSendImage,
+  } = useSendImage(sessionIdNumber, disabled);
 
   const handleImageUpload = () => {
     if (disabled) return;
     fileInputRef.current?.click();
-  };
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (disabled) return;
-    const file = e.target.files?.[0];
-    if (!file) return;
-    e.target.value = '';
-    setSelectedFile(file);
-    const objectUrl = URL.createObjectURL(file);
-    setPreviewUrl(objectUrl);
-  };
-
-  // 선택 해제 시 미리보기 URL revoke
-  useEffect(() => {
-    return () => {
-      if (previewUrl) URL.revokeObjectURL(previewUrl);
-    };
-  }, [previewUrl]);
-
-  const handleCancelPreview = () => {
-    if (previewUrl) URL.revokeObjectURL(previewUrl);
-    setPreviewUrl(null);
-    setSelectedFile(null);
-  };
-
-  const handleConfirmSendImage = async () => {
-    if (disabled || !selectedFile) return;
-    try {
-      await postChatMedia(Number(sessionId), selectedFile);
-    } finally {
-      handleCancelPreview();
-    }
   };
 
   const handleSendMessage = () => {
