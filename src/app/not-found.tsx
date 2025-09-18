@@ -8,11 +8,17 @@ export default function NotFound() {
   const actions = (
     <>
       <Link
-        href="/support"
+        href="/chat/list"
         className="w-full bg-mainColor hover:bg-[#4A66C9] text-white text-base font-semibold py-3.5 px-auto rounded-2xl transition-colors duration-200 flex items-center justify-center"
       >
-        메인 페이지로 돌아가기
+        채팅 목록으로 돌아가기
       </Link>
+      <button
+        onClick={() => window.history.back()}
+        className="w-full bg-gray-100 hover:bg-gray-200 text-textGray text-base font-semibold py-3.5 px-auto rounded-2xl transition-colors duration-200 flex items-center justify-center"
+      >
+        이전 페이지로 돌아가기
+      </button>
     </>
   );
 

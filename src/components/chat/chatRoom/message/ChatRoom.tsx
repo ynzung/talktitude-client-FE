@@ -1,7 +1,8 @@
 import React, { useEffect, useRef } from 'react';
-import { MessageSquarePlus } from 'lucide-react';
 import ClientBubble from './ClientBubble';
 import AgentBubble from './AgentBubble';
+import { EmptyState } from './EmptyState';
+import { ClientMedias } from './ClientMedias';
 import { ChatMessagePropsType } from '@/types/chat';
 
 interface ChatRoomProps {
@@ -12,7 +13,7 @@ export default function ChatRoom({ messages }: ChatRoomProps) {
   const chatEndRef = useRef<HTMLDivElement | null>(null);
 
   const scrollToBottom = () => {
-    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    chatEndRef.current?.scrollIntoView({ behavior: 'auto' });
   };
 
   useEffect(() => {
@@ -28,12 +29,7 @@ export default function ChatRoom({ messages }: ChatRoomProps) {
         style={{ height: 'calc(100dvh - 177px)' }}
       >
         {emptyMessage ? (
-          <div className="flex flex-col justify-center items-center h-full gap-3">
-            <MessageSquarePlus size={45} color="#aaaaaa" />
-            <p className="text-textLightGray text-sm">
-              궁금한 점을 메시지로 남겨주세요.
-            </p>
-          </div>
+          <EmptyState />
         ) : (
           <div className="flex flex-col min-h-full gap-3">
             {messages.map((message) => {
@@ -45,7 +41,11 @@ export default function ChatRoom({ messages }: ChatRoomProps) {
                     }
                     message={message}
                   >
-                    {message.textToShow}
+                    {message.medias && message.medias.length > 0 ? (
+                      <ClientMedias medias={message.medias} />
+                    ) : (
+                      message.textToShow
+                    )}
                   </ClientBubble>
                 );
               } else {

@@ -3,11 +3,11 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useParams } from 'next/navigation';
 import Header from '@/components/common/Header';
-import ChatRoom from './ChatRoom';
-import ChatInputBar from '@/components/chat/chatRoom/ChatInputBar';
+import ChatRoom from './message/ChatRoom';
+import ChatInputBar from '@/components/chat/chatRoom/input/ChatInputBar';
 import { ChatMessagePropsType, ChatHeaderInfoPropsType } from '@/types/chat';
 import { getChatMessage, getChatHeaderInfo } from '@/api/chatApi';
-import { useChatSocket } from '@/hooks/useChatSocket';
+import { useChatSocket } from '@/hooks/chat/useChatSocket';
 
 export default function ChatRoomPanel() {
   const { sessionId } = useParams();
