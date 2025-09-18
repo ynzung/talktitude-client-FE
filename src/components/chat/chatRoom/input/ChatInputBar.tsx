@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { PLACEHOLDERS } from '@/lib/constants/placeholders';
 import ChatInputBtn from './ChatInputBtn';
-import ImagePreview from '../ImagePreview';
+import ImagePreview from '../message/ImagePreview';
 import useSendImage from '@/hooks/chat/useSendImage';
 
 interface ChatInputBarProps {
