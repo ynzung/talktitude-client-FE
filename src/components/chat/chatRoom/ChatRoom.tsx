@@ -28,12 +28,7 @@ export default function ChatRoom({ messages }: ChatRoomProps) {
         style={{ height: 'calc(100dvh - 177px)' }}
       >
         {emptyMessage ? (
-          <div className="flex flex-col justify-center items-center h-full gap-3">
-            <MessageSquarePlus size={45} color="#aaaaaa" />
-            <p className="text-textLightGray text-sm">
-              궁금한 점을 메시지로 남겨주세요.
-            </p>
-          </div>
+          <EmptyState />
         ) : (
           <div className="flex flex-col min-h-full gap-3">
             {messages.map((message) => {
