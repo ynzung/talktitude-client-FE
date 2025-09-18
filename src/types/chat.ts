@@ -51,6 +51,7 @@ export interface ChatMessagePropsType {
   isTemporary: boolean;
   tempId: string;
   status: string;
+  medias?: { url: string; mediaType?: string }[];
 }
 
 export interface ChatPanelPropsType {
