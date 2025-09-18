@@ -1,7 +1,8 @@
 import React, { useEffect, useRef } from 'react';
-import { MessageSquarePlus } from 'lucide-react';
 import ClientBubble from './ClientBubble';
 import AgentBubble from './AgentBubble';
+import { EmptyState } from './EmptyState';
+import { ClientMedias } from './ClientMedias';
 import { ChatMessagePropsType } from '@/types/chat';
 
 interface ChatRoomProps {
@@ -12,7 +13,7 @@ export default function ChatRoom({ messages }: ChatRoomProps) {
   const chatEndRef = useRef<HTMLDivElement | null>(null);
 
   const scrollToBottom = () => {
-    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    chatEndRef.current?.scrollIntoView({ behavior: 'auto' });
   };
 
   useEffect(() => {
