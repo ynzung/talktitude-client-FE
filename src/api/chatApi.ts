@@ -125,7 +125,7 @@ export const postChatMedia = async (sessionId: number, file: File) => {
         },
       },
     );
-    console.log('사진 전송', response.data);
+    // console.log('사진 전송', response.data);
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {

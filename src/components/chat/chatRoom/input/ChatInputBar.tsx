@@ -67,7 +67,7 @@ export default function ChatInputBar({
             type="file"
             ref={fileInputRef}
             onChange={handleFileChange}
-            accept="image/*"
+            accept="image/*,.heic,.heif"
             className="hidden"
             disabled={disabled}
           />
