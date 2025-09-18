@@ -1,11 +1,12 @@
-import Image from 'next/image';
+import React from 'react';
 
 export function ClientMedias({ medias }: { medias: { url: string }[] }) {
   return (
     <div className="flex flex-col gap-2">
       {medias.map((m, i) => (
         <div key={i}>
-          <Image
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
             src={m.url}
             alt="채팅 메시지 이미지"
             width={200}
