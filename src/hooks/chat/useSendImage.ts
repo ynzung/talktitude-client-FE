@@ -17,9 +17,8 @@ export default function useSendImage(sessionId: number, disabled?: boolean) {
     }
 
     const isHeic =
-      file.type === 'image/heic' ||
-      file.type === 'image/heif' ||
-      /\.(heic|heif)$/i.test(file.name);
+      /(heic|heif)/i.test(file.type) ||
+      /\.(heic|heif)(?:$|\?)/i.test(file.name);
 
     if (isHeic) {
       try {
