@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { postChatMedia } from '@/api/chatApi';
-import heic2any from 'heic2any';
 
 export default function useSendImage(sessionId: number, disabled?: boolean) {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -24,6 +23,7 @@ export default function useSendImage(sessionId: number, disabled?: boolean) {
 
     if (isHeic) {
       try {
+        const { default: heic2any } = await import('heic2any');
         const converted = (await heic2any({
           blob: file,
           toType: 'image/jpeg',
