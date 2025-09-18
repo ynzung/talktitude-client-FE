@@ -26,7 +26,9 @@ export default function useSendImage(sessionId: number, disabled?: boolean) {
         const convertedBlob = Array.isArray(converted)
           ? converted[0]
           : converted;
-        const convertedFileName = file.name.replace(/\.(heic|heif)$/i, '.jpg');
+        const convertedFileName = /\.(heic|heif)$/i.test(file.name)
+          ? file.name.replace(/\.(heic|heif)$/i, '.jpg')
+          : `${file.name}.jpg`;
         const convertedFile = new File([convertedBlob], convertedFileName, {
           type: 'image/jpeg',
         });
