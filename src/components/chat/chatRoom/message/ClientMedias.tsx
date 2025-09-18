@@ -9,6 +9,8 @@ export function ClientMedias({ medias }: { medias: { url: string }[] }) {
           <img
             src={m.url}
             alt="채팅 메시지 이미지"
+            loading="lazy"
+            decoding="async"
             width={200}
             height={200}
             className="rounded-lg max-w-full h-auto object-contain"
